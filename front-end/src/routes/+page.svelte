@@ -31,14 +31,13 @@
 	<h1 id="titlebar">/J</h1>
 	<h2>Boards:</h2>
 	<div class="boardlist">
-		<ul>
 			{#each boardList as board}
 				<BoardBanner 
 					title={board.name}
 					imagePath={composeImageURL(board.banner, board.collectionName, board.id)}
+					textColor='#ffffff'
 				/>
 			{/each}
-		</ul>
 	</div>
 </main>
 
@@ -49,6 +48,7 @@
 	}
 	.boardlist {
 		display: grid;
+		grid-template-columns: 1fr 1fr;
 	}
 	h2 {
 		font-family: monospace;
