@@ -2,7 +2,6 @@
 	import PocketBase, { Record } from "pocketbase";
 	import { onMount } from "svelte";
 	import { PB_URL } from '../stores';
-	import Image from "../lib/Image.svelte";
 	import BoardBanner from "$lib/BoardBanner.svelte";
 
 	let pb = new PocketBase('http://127.0.0.1:8090')
@@ -17,7 +16,6 @@
 	const composeImageURL = (name : string, collectionIdOrName : string, recordId : string) => {
 		// http://127.0.0.1:8090/api/files/COLLECTION_ID_OR_NAME/RECORD_ID/FILENAME
 		let src = `${PB_URL}/api/files/${collectionIdOrName}/${recordId}/${name}`
-		console.log(`src: ${src}`)
 		return src
 	}
 
@@ -31,13 +29,14 @@
 	<h1 id="titlebar">/J</h1>
 	<h2>Boards:</h2>
 	<div class="boardlist">
-			{#each boardList as board}
-				<BoardBanner 
-					title={board.name}
-					imagePath={composeImageURL(board.banner, board.collectionName, board.id)}
-					textColor='#ffffff'
-				/>
-			{/each}
+		{#each boardList as board}
+			<BoardBanner 
+				title={board.name}
+				imagePath={composeImageURL(board.banner, board.collectionName, board.id)}
+				anchorURL={'./' + board.name}
+				textColor='#ffffff'
+			/>
+		{/each}
 	</div>
 </main>
 
