@@ -2,6 +2,11 @@
 	import { onMount } from 'svelte'
 
 	export let src : string;
+	let class_ : string;
+	export { class_ as class };
+
+	// export let width : number;
+	// export let height : number;
 
 	let loaded = false;
 	let failed = false;
@@ -10,6 +15,8 @@
 	onMount(() => {
 		const img = new Image();
 		img.src = src;
+		// img.width = width;
+		// img.height = width;
 		loading = true;
 
 		img.onload = () => {
@@ -25,7 +32,7 @@
 
 <main>
 {#if loaded}
-	<img {src} alt="Document" />
+	<img {src} class={class_} alt="Document" />
 	{:else if failed}
 	<img src="https://icon-library.com/images/not-found-icon/not-found-icon-20.jpg" alt="Not Found" />
 	{:else if loading}
