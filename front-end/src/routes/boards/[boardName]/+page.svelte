@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PB_URL } from '../../stores.js';
+	import { PB_URL } from '../../../stores.js';
 
 	import PocketBase from "pocketbase";
 

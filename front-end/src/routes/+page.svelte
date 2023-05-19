@@ -1,8 +1,8 @@
 <script lang="ts">
 	import PocketBase, { Record } from "pocketbase";
+	import BoardBanner from "$lib/BoardBanner.svelte";
 	import { onMount } from "svelte";
 	import { PB_URL } from '../stores';
-	import BoardBanner from "$lib/BoardBanner.svelte";
 
 	let pb = new PocketBase('http://127.0.0.1:8090')
 
@@ -26,6 +26,10 @@
 </script>
 
 <main>
+	<navbar class="navigation-bar">
+		<a href="./login">Login</a>
+		<a href="./signup">Sign-up</a>
+	</navbar>
 	<h1 id="titlebar">/J</h1>
 	<h2>Boards:</h2>
 	<div class="boardlist">
@@ -33,7 +37,7 @@
 			<BoardBanner 
 				title={board.name}
 				imagePath={composeImageURL(board.banner, board.collectionName, board.id)}
-				anchorURL={'./' + board.name}
+				anchorURL={'/boards/' + board.name}
 				textColor='#ffffff'
 			/>
 		{/each}
