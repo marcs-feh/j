@@ -4,8 +4,7 @@
 	import { onMount } from "svelte";
 	import { PB_URL } from '../stores';
 
-	let pb = new PocketBase('http://127.0.0.1:8090')
-
+	let pb = new PocketBase(PB_URL)
 	let boardList: Record[] = []
 
 	const updateBoardList = async () => {
@@ -26,11 +25,6 @@
 </script>
 
 <main>
-	<navbar class="navigation-bar">
-		<a href="./login">Login</a>
-		<a href="./signup">Sign-up</a>
-	</navbar>
-	<h1 id="titlebar">/J</h1>
 	<h2>Boards:</h2>
 	<div class="boardlist">
 		{#each boardList as board}
@@ -45,10 +39,6 @@
 </main>
 
 <style>
-	#titlebar {
-		text-align: center;
-		font-family: monospace;
-	}
 	.boardlist {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
