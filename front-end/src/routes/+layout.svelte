@@ -9,8 +9,8 @@
 </script>
 <main>
 	<navbar class="navigation-bar">
-		<a href="./login">Login</a>
-		<a href="./signup">Sign-up</a>
+		<a href="/login">Login</a>
+		<a href="/signup">Sign-up</a>
 		<button on:click={logOut}>Log-out</button>
 	</navbar>
 	<h1 id="titlebar">/J</h1>
