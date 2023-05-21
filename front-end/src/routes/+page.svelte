@@ -9,7 +9,6 @@
 
 	const updateBoardList = async () => {
 		boardList = await pb.collection('boards').getFullList()
-		console.table(boardList)
 	}
 
 	onMount(() => {
@@ -26,7 +25,7 @@
 				title={board.name}
 				imagePath={composeImageURL(PB_URL, board.banner, board.collectionName, board.id)}
 				anchorURL={'/boards/' + board.name}
-				textColor='#ffffff'
+				textColor={board.contrastColor || '#ffffff'}
 			/>
 		{/each}
 	</div>
