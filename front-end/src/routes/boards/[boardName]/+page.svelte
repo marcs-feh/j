@@ -1,14 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { PB_URL } from '../../../globals';
-
-	import  PocketBase, { Record } from "pocketbase";
+	import { PB_URL, pb } from '../../../globals';
+	import { Record } from "pocketbase";
 	import Post from '$lib/Post.svelte';
 	import { composeImageURL } from '../../../utils';
 
 	export let data;
-
-	const pb = new PocketBase(PB_URL)
 
 	const updateBoardPosts = async () => {
 		let posts = await pb.collection('posts').getList(1, 50, {

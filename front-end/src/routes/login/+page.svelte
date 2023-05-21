@@ -1,21 +1,94 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import PocketBase from "pocketbase"
-	import { PB_URL } from "../../globals";
+	import { PB_URL, currentUser, pb } from "../../globals";
+	import { redirect } from "@sveltejs/kit";
 
-	let pb = new PocketBase(PB_URL)
+	let username = '';
+	let password = '';
 
-	onMount(async () => {
-		if(!pb.authStore.isValid){
-			console.log('Running auth')
-			let authData = await pb.collection('users').authWithPassword(
-				'romulo227', '12345678')
-		} else {
-			console.log('already logged in')
+	// if(currentUser){
+	// 	console.log('Running auth')
+	// 	let authData = await pb.collection('users').authWithPassword(
+	// 		'romulo227', '12345678')
+	// } else {
+	// 	console.log('already logged in')
+	// }
+	let badLogin = false
+	const login = async () => {
+		pb.authStore.clear()
+		try {
+			await pb.collection('users').authWithPassword(username, password)
+		} catch (err) {
+			badLogin = true
 		}
-	})
+	}
+
+	// onMount(async () => {
+	// })
 
 </script>
-
 <main>
+	<div class='login-main'>
+	<h1>Log In</h1>
+	<form class="login-form" on:submit|preventDefault>
+		<input style="padding: 1rem; margin:0.3rem"
+			type="text"
+			placeholder="Username"
+			bind:value={username}
+		/>
+		<input style="padding: 1rem; margin:0.3rem"
+			type="password"
+			placeholder="Password"
+			bind:value={password}
+		/>
+		<button class="login-button" on:click={login}>Login</button>
+		{#if $currentUser}
+			<div class='good-login'>Logged in as {$currentUser.name}</div>
+			{:else if badLogin}
+			<div class='bad-login'>Invalid Credentials</div>
+		{/if}
+	</form>
+	</div>
 </main>
+
+<style>
+	h1 {
+		text-align: center
+	}
+	.login-main {
+		display: box;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.login-form {
+		display: grid;
+		grid-template-columns: 1fr;
+		margin-left: auto;
+		margin-right: auto;
+		width: clamp(300px, 75%, 400px);
+	}
+	.bad-login {
+		display: box;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		padding: 0.5rem 1rem 0.5rem 1rem;
+		color: red;
+	}
+
+	.good-login {
+		display: box;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		padding: 0.5rem 1rem 0.5rem 1rem;
+		color: lime;
+	}
+	.login-button {
+		display: box;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0.5rem 1rem 0.5rem 1rem;
+	}
+
+</style>

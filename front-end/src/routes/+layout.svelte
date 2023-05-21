@@ -1,20 +1,23 @@
 <script>
 	import PocketBase from "pocketbase"
-	import { PB_URL } from "../globals";
-	let pb = new PocketBase(PB_URL)
+	import { PB_URL, currentUser, pb } from "../globals";
+
+	export const csr = true; // CSR is needed for the navbar
 
 	const logOut = () => {
 		pb.authStore.clear()
 		window.location.reload()
 	}
+
 </script>
 <main>
 	<navbar class="navigation-bar">
 		<div id="titlebar">
-		<span>/J</span>
+		<a href="/">/J</a>
 		</div>
 		<div class="loginbuttons">
-			{#if pb.authStore.isValid }
+			{#if $currentUser }
+				Me: {$currentUser.name}
 				<button on:click={logOut}>Log-out</button>
 			{:else}
 				<a href="/login">Login</a>
@@ -22,10 +25,15 @@
 			{/if}
 		</div>
 	</navbar>
+	<div class="main-section">
 	<slot />
+	</div>
 </main>
 
 <style>
+	main {
+		font-family: 'Roboto', sans-serif;
+	}
 	.navigation-bar {
 		display: grid;
 		font-family: monospace;
@@ -34,8 +42,11 @@
 		padding-top: 0.4rem;
 	}
 
-	.loginbuttons {
-
+	.main-section {
+		display: box;
+		margin-left: auto;
+		margin-right: auto;
+		width: clamp(600px, 95%, 1200px)
 	}
 
 	#titlebar {

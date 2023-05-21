@@ -1,11 +1,10 @@
 <script lang="ts">
-	import PocketBase, { Record } from "pocketbase";
+	import { Record } from "pocketbase";
 	import BoardBanner from "$lib/BoardBanner.svelte";
 	import { onMount } from "svelte";
 	import { composeImageURL } from "../utils"
-	import { PB_URL } from "../globals";
+	import { PB_URL, pb } from "../globals";
 
-	let pb = new PocketBase(PB_URL)
 	let boardList: Record[] = []
 
 	const updateBoardList = async () => {
