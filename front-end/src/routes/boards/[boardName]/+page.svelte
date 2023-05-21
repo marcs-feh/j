@@ -1,18 +1,36 @@
 <script lang="ts">
-	import { PB_URL } from '../../../stores.js';
+	import { onMount } from 'svelte';
+	import { PB_URL } from '../../../globals';
 
-	import PocketBase from "pocketbase";
+	import  PocketBase, { Record } from "pocketbase";
+	import Post from '$lib/Post.svelte';
+	import { composeImageURL } from '../../../utils';
 
 	export let data;
 
 	const pb = new PocketBase(PB_URL)
-	const getBoardPosts = async (name : string) => {
+
+	const updateBoardPosts = async () => {
+		let posts = await pb.collection('posts').getList(1, 50, {
+			sort: '-created'
+		})
+		return posts;
 	}
+
+	let posts : Record[] = [];
+	onMount(async () => {
+		posts = (await updateBoardPosts()).items
+	})
 
 </script>
 
 <main>
-	hello { data.boardName }
+	{#each posts as p}
+		<Post
+			imagePath={composeImageURL(PB_URL, p.attachment, p.collectionId, p.id)}
+			contents={p.contents}
+		/>
+	{/each}
 </main>
 
 <style></style>

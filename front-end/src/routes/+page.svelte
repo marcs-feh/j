@@ -2,7 +2,8 @@
 	import PocketBase, { Record } from "pocketbase";
 	import BoardBanner from "$lib/BoardBanner.svelte";
 	import { onMount } from "svelte";
-	import { PB_URL } from '../stores';
+	import { composeImageURL } from "../utils"
+	import { PB_URL } from "../globals";
 
 	let pb = new PocketBase(PB_URL)
 	let boardList: Record[] = []
@@ -10,12 +11,6 @@
 	const updateBoardList = async () => {
 		boardList = await pb.collection('boards').getFullList()
 		console.table(boardList)
-	}
-
-	const composeImageURL = (name : string, collectionIdOrName : string, recordId : string) => {
-		// http://127.0.0.1:8090/api/files/COLLECTION_ID_OR_NAME/RECORD_ID/FILENAME
-		let src = `${PB_URL}/api/files/${collectionIdOrName}/${recordId}/${name}`
-		return src
 	}
 
 	onMount(() => {
@@ -30,7 +25,7 @@
 		{#each boardList as board}
 			<BoardBanner 
 				title={board.name}
-				imagePath={composeImageURL(board.banner, board.collectionName, board.id)}
+				imagePath={composeImageURL(PB_URL, board.banner, board.collectionName, board.id)}
 				anchorURL={'/boards/' + board.name}
 				textColor='#ffffff'
 			/>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import PocketBase from "pocketbase"
-	import { PB_URL } from "../../stores";
+	import { PB_URL } from "../../globals";
 
 	let pb = new PocketBase(PB_URL)
 

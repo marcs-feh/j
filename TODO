@@ -1,3 +1,6 @@
-- [ ] Banner component
-- [ ] Login Signup component
-- [ ] Navbar
+- [x] Banner component
+- [ ] Login/Signup component
+- [x] Navbar
+- [ ] User profile
+- [ ] Post form
+- [ ] Board view

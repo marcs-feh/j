@@ -3,7 +3,6 @@
 	export let anchorURL : string;
 	export let imagePath : string;
 	export let textColor : string;
-
 </script>
 
 <main>
