@@ -72,6 +72,62 @@
     "options": {}
   },
   {
+    "id": "8nzz6c4vb2w7xtt",
+    "name": "boards",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "pibks6bo",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "nwguobrv",
+        "name": "description",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "87u1tapg",
+        "name": "banner",
+        "type": "file",
+        "system": false,
+        "required": false,
+        "options": {
+          "maxSelect": 1,
+          "maxSize": 5242880,
+          "mimeTypes": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ],
+          "thumbs": []
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
     "id": "_pb_users_auth_",
     "name": "users",
     "type": "auth",
@@ -110,7 +166,7 @@
     "indexes": [],
     "listRule": "",
     "viewRule": "",
-    "createRule": "",
+    "createRule": null,
     "updateRule": "id = @request.auth.id",
     "deleteRule": "id = @request.auth.id",
     "options": {
@@ -139,6 +195,20 @@
         "options": {
           "collectionId": "_pb_users_auth_",
           "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "l6ql8umg",
+        "name": "board",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "options": {
+          "collectionId": "8nzz6c4vb2w7xtt",
+          "cascadeDelete": false,
           "minSelect": null,
           "maxSelect": 1,
           "displayFields": []
@@ -199,63 +269,7 @@
     "indexes": [],
     "listRule": "",
     "viewRule": "",
-    "createRule": null,
-    "updateRule": null,
-    "deleteRule": null,
-    "options": {}
-  },
-  {
-    "id": "8nzz6c4vb2w7xtt",
-    "name": "boards",
-    "type": "base",
-    "system": false,
-    "schema": [
-      {
-        "id": "pibks6bo",
-        "name": "name",
-        "type": "text",
-        "system": false,
-        "required": true,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "nwguobrv",
-        "name": "description",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "87u1tapg",
-        "name": "banner",
-        "type": "file",
-        "system": false,
-        "required": false,
-        "options": {
-          "maxSelect": 1,
-          "maxSize": 5242880,
-          "mimeTypes": [
-            "image/jpeg",
-            "image/png",
-            "image/webp"
-          ],
-          "thumbs": []
-        }
-      }
-    ],
-    "indexes": [],
-    "listRule": "",
-    "viewRule": "",
-    "createRule": null,
+    "createRule": "author.id = @request.auth.id &&\nlikes = 0 &&\ndislikes = 0",
     "updateRule": null,
     "deleteRule": null,
     "options": {}
