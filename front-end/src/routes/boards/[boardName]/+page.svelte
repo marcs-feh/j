@@ -15,7 +15,7 @@
 		return posts;
 	}
 
-	let posts : Record[] = [];
+	let posts : any = [];
 	onMount(async () => {
 		posts = (await updateBoardPosts()).items
 	})
@@ -24,13 +24,15 @@
 
 <main>
 	<h1 id="boardtitle">/{data.boardName}</h1>
+
 	<button class="post-button">Create Post</button>
+
 	{#each posts as p}
 		<Post
 			imagePath={composeImageURL(PB_URL, p.attachment, p.collectionId, p.id)}
 			contents={p.contents}
 			authorName={p.expand.author.name}
-			timestamp={p.expand.author.created}
+			timestamp={p. expand.author.created}
 		/>
 	{/each}
 </main>
@@ -40,4 +42,13 @@
 		text-align: center;
 		font-family: monospace;
 	}
+
+	.post-button {
+		display:flex;
+		align-items: center;
+		justify-content: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
 </style>

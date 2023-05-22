@@ -1,57 +1,41 @@
 <script>
 	import PocketBase from "pocketbase"
+	import Navbar from "$lib/Navbar.svelte"
 	import { PB_URL, currentUser, pb } from "../globals";
-
-	export const csr = true; // CSR is needed for the navbar
-
-	const logOut = () => {
-		pb.authStore.clear()
-		window.location.reload()
-	}
-
 </script>
 <main>
-	<navbar class="navigation-bar">
-		<div id="titlebar">
-		<a href="/">/J</a>
-		</div>
-		<div class="loginbuttons">
-			{#if $currentUser }
-				Me: {$currentUser.name}
-				<button on:click={logOut}>Log-out</button>
-			{:else}
-				<a href="/login">Login</a>
-				<a href="/signup">Sign-up</a>
-			{/if}
-		</div>
-	</navbar>
+	<Navbar />
 	<div class="main-section">
 	<slot />
 	</div>
 </main>
 
 <style>
-	main {
+	:global(body){
 		font-family: 'Roboto', sans-serif;
+		font-size: 1rem;
+		background: #1e1e1e;
+		color: #dcdcdc;
 	}
-	.navigation-bar {
-		display: grid;
-		font-family: monospace;
-		grid-template-columns: 3fr 1fr;
-		padding-bottom: 1rem;
-		padding-top: 0.4rem;
+
+	:global(button){
+		font-family: 'Roboto', sans-serif;
+		font-size: 1rem;
+		border: none;
+		border-radius: 5%;
 	}
+
+	/* Hightlight all links all the time */
+	:global(a){ text-decoration: none; }
+	:global(a:visited) { color:#dcdcdc; }
+	:global(a:active) { color:#dcdcdc; }
+	:global(a:hover) { color:lime; }
+	:global(a:link) { color:#dcdcdc; }
 
 	.main-section {
-		display: box;
+		display: block;
 		margin-left: auto;
 		margin-right: auto;
-		width: clamp(600px, 95%, 1200px)
-	}
-
-	#titlebar {
-		text-align: center;
-		font-family: monospace;
-		font-size: 1.2rem;
+		width: clamp(600px, 95%, 1100px)
 	}
 </style>
