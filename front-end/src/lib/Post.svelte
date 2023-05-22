@@ -25,6 +25,7 @@
 	.post {
 		display: grid;
 		grid-template-columns: 1fr 2fr;
+		margin: 1rem;
 	}
 	.post-picture {
 		margin-right: 16px;

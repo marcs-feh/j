@@ -21,8 +21,7 @@
 	:global(button){
 		font-family: 'Roboto', sans-serif;
 		font-size: 1rem;
-		border: none;
-		border-radius: 5%;
+		border: solid;
 	}
 
 	/* Hightlight all links all the time */

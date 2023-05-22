@@ -1,6 +1,5 @@
 <script>
 	import { PB_URL, currentUser, pb } from "../globals";
-	import Button from "$lib/Button.svelte"
 
 	const logOut = () => {
 		pb.authStore.clear()
