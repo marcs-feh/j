@@ -19,16 +19,18 @@
 		<div class="loginbuttons">
 			{#if $currentUser }
 				<div class="anchor loginbutton">
+					<a href={"/user/" + $currentUser.username}>
 					{$currentUser.username}
+					</a>
 				</div>
 				<div class="loginbutton">
 					<button on:click={logOut}>Log out</button>
 				</div>
 			{:else}
-				<div class="anchor loginbutton">
+				<div class="loginbutton">
 				<a style="padding: 1rem;"href="/login">Login</a>
 				</div>
-				<div class="anchor loginbutton">
+				<div class="loginbutton">
 				<a href="/signup">Sign-up</a>
 				</div>
 			{/if}
