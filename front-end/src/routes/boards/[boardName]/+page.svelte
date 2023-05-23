@@ -8,20 +8,21 @@
 	const updateBoardPosts = async () => {
 		let posts = await pb.collection('posts').getList(1, 50, {
 			sort: '-created',
-			expand: 'author',
+			expand: 'author(username)',
 			filter: `board.name = "${data.boardName}"`,
 		})
 		return posts;
 	}
 
-	// const getAuthorName = async (id:string) => {
-	// 	const name = (await pb.collection('users').getOne(id)).name
-	// 	return name
-	// }
+	const getAuthorName = async (id:string) => {
+		const name = (await pb.collection('users').getOne(id)).name
+		return name
+	}
 
 	let posts : any = null
 	onMount(async () => {
 		posts = (await updateBoardPosts()).items
+		console.table(posts.expand)
 	})
 
 </script>
@@ -40,7 +41,7 @@
 		<Post
 			imagePath={composeImageURL(PB_URL, p.attachment, p.collectionId, p.id)}
 			contents={p.contents}
-			authorName={p.author}
+			authorName={getAuthorName(p.author)}
 			timestamp={p.created}
 		/>
 	{/each}
