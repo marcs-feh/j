@@ -15,7 +15,7 @@
 			<img src={imagePath} alt="Post" />
 		</div>
 		<div class="post-contents">
-			<span class="post-info">Posted by: {authorName} @ {timestamp} </span>
+			<span class="post-info">Posted by: <a href="/user/{authorName}">{authorName}</a> @ {timestamp} </span>
 			<p> {contents} </p>
 		</div>
 	</div>

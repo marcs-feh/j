@@ -18,21 +18,17 @@
 
 		<div class="loginbuttons">
 			{#if $currentUser }
-				<div class="anchor loginbutton">
-					<a href={"/user/" + $currentUser.username}>
-					{$currentUser.username}
-					</a>
-				</div>
-				<div class="loginbutton">
-					<button on:click={logOut}>Log out</button>
-				</div>
+					<a class="anchor loginbutton"
+						href={"/user/" + $currentUser.username}>
+					{$currentUser.username}</a>
+
+					<button class="loginbutton"
+						on:click={logOut}>Log out</button>
 			{:else}
-				<div class="loginbutton">
-				<a style="padding: 1rem;"href="/login">Login</a>
-				</div>
-				<div class="loginbutton">
-				<a href="/signup">Sign-up</a>
-				</div>
+				<a class="anchor loginbutton"
+						href="/login">Login</a>
+				<a class="anchor loginbutton"
+					href="/signup">Sign-up</a>
 			{/if}
 		</div>
 
@@ -63,16 +59,19 @@
 		flex:1;
 	}
 
-  button {
+ .loginbutton {
 		background: transparent;
 		border-color: lime;
 		border-style: solid;
+		border-radius: 0.2rem;
 		border-width: 0.01rem;
 		padding: 0.5rem 0.3rem 0.5rem 0.3rem;
+		margin-left: 0.5rem;
+		margin-right: 0.5rem;
 		color: #dcdcdc;
 	}
 
-	button:hover {
+	.loginbutton:hover {
 		background: lime;
 		color: #2d2d2d;
 	}
