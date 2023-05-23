@@ -8,15 +8,10 @@
 	const updateBoardPosts = async () => {
 		let posts = await pb.collection('posts').getList(1, 50, {
 			sort: '-created',
-			expand: 'author(username)',
 			filter: `board.name = "${data.boardName}"`,
+			expand: 'author',
 		})
 		return posts;
-	}
-
-	const getAuthorName = async (id:string) => {
-		const name = (await pb.collection('users').getOne(id)).name
-		return name
 	}
 
 	let posts : any = null
@@ -41,8 +36,8 @@
 		<Post
 			imagePath={composeImageURL(PB_URL, p.attachment, p.collectionId, p.id)}
 			contents={p.contents}
-			authorName={getAuthorName(p.author)}
-			timestamp={p.created}
+			authorName={p.expand.author.username}
+			timestamp={p.created.slice(0, p.created.length - 8)}
 		/>
 	{/each}
 	{:else}
