@@ -19,7 +19,7 @@
 		<div class="loginbuttons">
 			{#if $currentUser }
 				<div class="anchor loginbutton">
-					{$currentUser.name}
+					{$currentUser.username}
 				</div>
 				<div class="loginbutton">
 					<button on:click={logOut}>Log out</button>
@@ -50,6 +50,7 @@
 	.anchor {
 		padding: 0.5rem 0.3rem 0.5rem 0.3rem;
 	}
+
 	.loginbuttons {
 		display: flex;
 		justify-content: center;
@@ -68,6 +69,7 @@
 		padding: 0.5rem 0.3rem 0.5rem 0.3rem;
 		color: #dcdcdc;
 	}
+
 	button:hover {
 		background: lime;
 		color: #2d2d2d;
@@ -79,6 +81,7 @@
 		color: lime;
 		font-size: 1.6rem;
 	}
+
 	#titlebar > a {
 		color: lime;
 	}

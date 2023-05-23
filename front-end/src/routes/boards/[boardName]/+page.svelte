@@ -35,7 +35,7 @@
 		<Post
 			imagePath={composeImageURL(PB_URL, p.attachment, p.collectionId, p.id)}
 			contents={p.contents}
-			authorName={p.expand.author.name}
+			authorName={p.expand.author.username}
 			timestamp={p. expand.author.created}
 		/>
 	{/each}

@@ -6,13 +6,6 @@
 	let username = '';
 	let password = '';
 
-	// if(currentUser){
-	// 	console.log('Running auth')
-	// 	let authData = await pb.collection('users').authWithPassword(
-	// 		'romulo227', '12345678')
-	// } else {
-	// 	console.log('already logged in')
-	// }
 	let badLogin = false
 	const login = async () => {
 		pb.authStore.clear()
@@ -31,19 +24,19 @@
 	<div class='login-main'>
 	<h1>Log In</h1>
 	<form class="login-form" on:submit|preventDefault>
-		<input style="padding: 1rem; margin:0.3rem"
+		<input class="form-input"
 			type="text"
 			placeholder="Username"
 			bind:value={username}
 		/>
-		<input style="padding: 1rem; margin:0.3rem"
+		<input class="form-input"
 			type="password"
 			placeholder="Password"
 			bind:value={password}
 		/>
 		<button class="login-button" on:click={login}>Login</button>
 		{#if $currentUser}
-			<div class='good-login'>Logged in as {$currentUser.name}</div>
+			<div class='good-login'>Logged in as {$currentUser.username}</div>
 			{:else if badLogin}
 			<div class='bad-login'>Invalid Credentials</div>
 		{/if}
@@ -84,11 +77,17 @@
 		padding: 0.5rem 1rem 0.5rem 1rem;
 		color: lime;
 	}
+
 	.login-button {
 		display: box;
 		margin-left: auto;
 		margin-right: auto;
 		padding: 0.5rem 1rem 0.5rem 1rem;
+	}
+
+	.form-input {
+		padding: 1rem;
+		margin:0.3rem;
 	}
 
 </style>
