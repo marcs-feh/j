@@ -1,11 +1,10 @@
 <script lang="ts">
 	export let data;
+	export const csr = true;
 	import { onMount } from 'svelte';
 	import { PB_URL, currentUser, pb } from '../../../globals';
-	import { Record } from "pocketbase";
 	import Post from '$lib/Post.svelte';
 	import { composeImageURL } from '../../../utils';
-	import { redirect } from '@sveltejs/kit';
 
 	const updateBoardPosts = async () => {
 		let posts = await pb.collection('posts').getList(1, 50, {
@@ -16,9 +15,9 @@
 		return posts;
 	}
 
-	let posts : any = [];
+	let posts : any = null
 	onMount(async () => {
-		posts = (await updateBoardPosts()).items
+		posts =(await updateBoardPosts()).items
 	})
 
 </script>
@@ -31,15 +30,16 @@
 	{:else}
 	<a href='/login' class="post-button">Login to post</a>
 	{/if}
-	{#if posts.lenght > 0}
-		{#each posts as p}
-			<Post
-				imagePath={composeImageURL(PB_URL, p.attachment, p.collectionId, p.id)}
-				contents={p.contents}
-				authorName={p.expand.author.username}
-				timestamp={p.expand.author.created}
-			/>
-		{/each}
+
+	{#if posts}
+	{#each posts as p}
+		<Post
+			imagePath={composeImageURL(PB_URL, p.attachment, p.collectionId, p.id)}
+			contents={p.contents}
+			authorName={p.author.username}
+			timestamp={p.author.created}
+		/>
+	{/each}
 	{:else}
 		<h2 style="text-align: center; opacity: 0.6;">No posts... yet.</h2>
 	{/if}
