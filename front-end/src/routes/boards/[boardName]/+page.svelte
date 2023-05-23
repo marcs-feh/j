@@ -1,6 +1,5 @@
 <script lang="ts">
 	export let data;
-	export const csr = true;
 	import { onMount } from 'svelte';
 	import { PB_URL, currentUser, pb } from '../../../globals';
 	import Post from '$lib/Post.svelte';
@@ -15,9 +14,14 @@
 		return posts;
 	}
 
+	// const getAuthorName = async (id:string) => {
+	// 	const name = (await pb.collection('users').getOne(id)).name
+	// 	return name
+	// }
+
 	let posts : any = null
 	onMount(async () => {
-		posts =(await updateBoardPosts()).items
+		posts = (await updateBoardPosts()).items
 	})
 
 </script>
@@ -36,8 +40,8 @@
 		<Post
 			imagePath={composeImageURL(PB_URL, p.attachment, p.collectionId, p.id)}
 			contents={p.contents}
-			authorName={p.author.username}
-			timestamp={p.author.created}
+			authorName={p.author}
+			timestamp={p.created}
 		/>
 	{/each}
 	{:else}
