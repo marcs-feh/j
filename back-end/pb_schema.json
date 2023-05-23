@@ -117,6 +117,18 @@
           ],
           "thumbs": []
         }
+      },
+      {
+        "id": "fr1okhef",
+        "name": "contrastColor",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": "#[0-9a-fA-F]{3}"
+        }
       }
     ],
     "indexes": [],
@@ -128,14 +140,14 @@
     "options": {}
   },
   {
-    "id": "_pb_users_auth_",
-    "name": "users",
-    "type": "auth",
+    "id": "viczd41hbo6ydvw",
+    "name": "postCount",
+    "type": "view",
     "system": false,
     "schema": [
       {
-        "id": "users_name",
-        "name": "name",
+        "id": "kheqicln",
+        "name": "username",
         "type": "text",
         "system": false,
         "required": false,
@@ -144,6 +156,42 @@
           "max": null,
           "pattern": ""
         }
+      },
+      {
+        "id": "7kzldvhc",
+        "name": "postCount",
+        "type": "number",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {
+      "query": "select users.id as id, users.username, count(posts.id) as postCount from users inner join posts on posts.author = users.id group by users.id;"
+    }
+  },
+  {
+    "id": "_pb_users_auth_",
+    "name": "users",
+    "type": "auth",
+    "system": false,
+    "schema": [
+      {
+        "id": "sw6xrocr",
+        "name": "mod",
+        "type": "bool",
+        "system": false,
+        "required": false,
+        "options": {}
       },
       {
         "id": "users_avatar",
@@ -166,7 +214,7 @@
     "indexes": [],
     "listRule": "",
     "viewRule": "",
-    "createRule": null,
+    "createRule": "@request.data.mod = false",
     "updateRule": "id = @request.auth.id",
     "deleteRule": "id = @request.auth.id",
     "options": {
@@ -197,7 +245,9 @@
           "cascadeDelete": true,
           "minSelect": null,
           "maxSelect": 1,
-          "displayFields": []
+          "displayFields": [
+            "username"
+          ]
         }
       },
       {
@@ -269,7 +319,7 @@
     "indexes": [],
     "listRule": "",
     "viewRule": "",
-    "createRule": "author.id = @request.auth.id &&\nlikes = 0 &&\ndislikes = 0",
+    "createRule": "author.id = @request.auth.id",
     "updateRule": null,
     "deleteRule": null,
     "options": {}
