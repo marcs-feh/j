@@ -27,16 +27,28 @@
 
 <main>
 	<h1>Post on: /{data.boardName} </h1>
-	<form enctype="multipart/form-data">
-		<textarea bind:value={contents} name="post-contents" cols="30" rows="10"></textarea>
-		<input bind:files={file} type="file" accept="image/*" id="fileInput" name="attachment">
-	{#if postStatus != 1}
-		<button on:click={createPost}>Post!</button>
-	{/if}
-	</form>
-	{#if postStatus == 1}
-		<a href={"/boards/"+data.boardName}> Post created! </a>
-	{:else if postStatus == -1}
-		Something went wrong when creating this post.
-	{/if}
+	<div class="postarea">
+		<form enctype="multipart/form-data">
+			<div class="text-editor">
+				<textarea bind:value={contents} name="post-contents" cols="30" rows="10"></textarea>
+			</div>
+			<input bind:files={file} type="file" accept="image/*" id="fileInput" name="attachment">
+				{#if postStatus != 1}
+					<button on:click={createPost}>Post!</button>
+				{/if}
+		</form>
+		{#if postStatus == 1}
+			<a href={"/boards/"+data.boardName}> Post created! </a>
+			{:else if postStatus == -1}
+			Something went wrong when creating this post.
+		{/if}
+	</div>
 </main>
+
+<style>
+	.postarea {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+</style>
