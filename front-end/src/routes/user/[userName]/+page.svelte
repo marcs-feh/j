@@ -4,24 +4,34 @@
 	import genericAvatar from "$lib/assets/profile_pic.png"
 
 	export let data;
-
-	let profilePic : string = composeImageURL(PB_URL, data.userInfo.avatar, 'users', data.userInfo.id)
+	let profilePic : string
+	if(data.userInfo){
+		profilePic = composeImageURL(PB_URL, data.userInfo.avatar, 'users', data.userInfo.id)
+	}
 
 </script>
 
 <main>
-	<div class="user-profile">
-		<div class="user-avatar">
-			{#if data.userInfo.avatar == ''}
-			<img src={genericAvatar} alt="Avatar">
-				{:else}
-			<img src={profilePic} alt="Avatar">
-				{/if}
+	{#if data.userInfo}
+		<div class="user-profile">
+			<div class="user-avatar">
+				{#if data.userInfo.avatar == ''}
+				<img src={genericAvatar} alt="Avatar">
+					{:else}
+				<img src={profilePic} alt="Avatar">
+					{/if}
+			</div>
+			<span id="username">
+				{data.userInfo.username}
+			</span>
+			<span id="userbio">{data.userInfo.bio}</span>
+			<span id="userposts">Posts: {data.userPostCount}</span>
 		</div>
-		<span id="username">
-		{data.userInfo.username}
-		</span>
-	</div>
+	{:else}
+		<div class="user-profile">
+			User not found
+		</div>
+	{/if}
 </main>
 
 <style>
@@ -54,5 +64,7 @@
 	#username {
 		margin: 1rem;
 	}
+
+
 
 </style>
