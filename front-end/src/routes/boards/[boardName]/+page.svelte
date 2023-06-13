@@ -1,25 +1,8 @@
 <script lang="ts">
-	export let data;
-	import { onMount } from 'svelte';
-	import { PB_URL, currentUser, pb } from '../../../globals';
-	import Post from '$lib/Post.svelte';
+	import { PB_URL, currentUser } from '../../../globals';
 	import { composeImageURL } from '../../../utils';
-
-	const updateBoardPosts = async () => {
-		let posts = await pb.collection('posts').getList(1, 50, {
-			sort: '-created',
-			filter: `board.name = "${data.boardName}"`,
-			expand: 'author',
-		})
-		return posts;
-	}
-
-	let posts : any = null
-	onMount(async () => {
-		posts = (await updateBoardPosts()).items
-		console.table(posts.expand)
-	})
-
+	export let data;
+	import Post from '$lib/Post.svelte';
 </script>
 
 <main>
@@ -31,8 +14,8 @@
 	<a href='/login' class="post-button">Login to post</a>
 	{/if}
 
-	{#if posts}
-	{#each posts as p}
+	{#if data.posts}
+	{#each data.posts.items as p}
 		<Post
 			imagePath={composeImageURL(PB_URL, p.attachment, p.collectionId, p.id)}
 			contents={p.contents}
