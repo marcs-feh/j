@@ -61,7 +61,4 @@ const createPost = async () => {
 </main>
 
 <style>
-  Post {
-    background: blue;
-  }
 </style>
