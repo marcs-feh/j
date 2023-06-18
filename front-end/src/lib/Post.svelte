@@ -2,11 +2,11 @@
 	export let contents : string;
 	// export let anchorURL : string;
 	export let authorName : string;
-	export let imagePath : string;
+	export let imagePath : string | null;
 	export let timestamp : string;
 	export let boardName : string;
 	export let postId : string;
-
+	
 </script>
 
 <main>
@@ -59,6 +59,8 @@
 		font-size: 1rem;
 		max-height: 200px;
 		overflow-y:auto;
+		white-space: pre-line;
+
 	}
 
 	.view-post {

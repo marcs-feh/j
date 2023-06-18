@@ -5,7 +5,7 @@
 	const formData = new FormData()
 	let file : any;
 	let contents : string
-	let authorID = pb.authStore.model?.id;
+	let authorID : any = pb.authStore.model?.id;
 
 	let postStatus = 0 // -1 bad, 1 good
 
@@ -13,6 +13,7 @@
 		formData.append('author', authorID)
 		formData.append('board', data.boardID)
 		formData.append('contents', contents)
+		console.table(contents)
 		formData.append('attachment', new Blob(file))
 		try {
 			await pb.collection('posts').create(formData)
@@ -30,7 +31,7 @@
 	<div class="postarea">
 		<form enctype="multipart/form-data">
 			<div class="text-editor">
-				<textarea bind:value={contents} name="post-contents" cols="30" rows="10"></textarea>
+				<textarea bind:value={contents} name="post-contents" cols="30" rows="10" required></textarea>
 			</div>
 			<input bind:files={file} type="file" accept="image/*" id="fileInput" name="attachment">
 				{#if postStatus != 1}
@@ -49,6 +50,10 @@
 	.postarea {
 		display: grid;
 		grid-template-columns: 1fr;
+	}
+
+	textarea {
+		white-space: pre-wrap;
 	}
 
 </style>

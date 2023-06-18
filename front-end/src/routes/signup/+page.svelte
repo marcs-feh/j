@@ -15,8 +15,10 @@
 	let badsignup = false
 	const signup = async () => {
 		try {
+			badsignup = false
 			await pb.collection('users').create(userData)
 		} catch (err){
+			console.log(err)
 			badsignup = true
 		}
 		await pb.collection('users').authWithPassword(userData.email, userData.password)
