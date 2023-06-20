@@ -1,29 +1,32 @@
 <script lang="ts">
 	export let contents : string;
-	// export let anchorURL : string;
 	export let authorName : string;
 	export let imagePath : string | null;
 	export let timestamp : string;
 	export let boardName : string;
 	export let postId : string;
-	
+	export let gotoButton : bool;
+
 </script>
 
 <main>
 	<div class="post">
-		<!--- TODO: Add like dislike ratio --->
-		<!--- TODO: Prettier timestamp --->
+		<!--- TODO: Add like Count --->
 		<div class="post-picture" >
 			<img src={imagePath} alt="Post" />
 		</div>
 		<div class="content-area">
-		<div class="post-contents">
-			<span class="post-info">Posted by: <a href="/user/{authorName}">{authorName}</a> @ {timestamp} </span>
-			<a class="view-post"
-				 href={`/boards/${boardName}/view/${postId}`}>
-					<i>Go to Post</i> </a>
-			<p> {contents} </p>
-		</div>
+			<div class="post-contents">
+				<span class="post-info">Posted by: <a href="/user/{authorName}">{authorName}</a> @ {timestamp} </span>
+
+				{#if gotoButton}
+					<a class="view-post"
+						href={`/boards/${boardName}/view/${postId}`}>
+						<i>Go to Post</i>
+					</a>
+				{/if}
+				<p> {contents} </p>
+			</div>
 		</div>
 	</div>
 

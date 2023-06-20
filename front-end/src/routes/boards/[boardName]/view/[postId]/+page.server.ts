@@ -15,7 +15,7 @@ export async function load({ params, url }){
 		console.table(filt)
 		replies = await pb.collection('replies').getList(1, 50, {
 			sort: '-created',
-			// filter: filt,
+			expand: 'author',
 		})
 
 	}

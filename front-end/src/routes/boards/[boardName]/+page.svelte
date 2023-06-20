@@ -25,6 +25,7 @@
 			timestamp={p.created.slice(0, p.created.length - 8)}
 			boardName={data.boardName}
 			postId={p.id}
+			gotoButton={true}
 		/>
 	{/each}
 	{:else}

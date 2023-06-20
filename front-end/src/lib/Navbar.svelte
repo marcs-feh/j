@@ -4,6 +4,7 @@
 	const logOut = () => {
 		pb.authStore.clear()
 		window.location.reload()
+		window.location.href = '/'
 	}
 
 </script>

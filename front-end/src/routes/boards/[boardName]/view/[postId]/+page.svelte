@@ -17,6 +17,7 @@
 			timestamp={p.created.slice(0, p.created.length - 8)}
 			boardName={data.boardName}
 			postId={p.id}
+			gotoButton={false}
 		/>
 		{#if $currentUser}
 		<PostButton title={"Reply to Post"} ref={`/boards/${data.boardName}/reply/${data.post.id}`} />
@@ -27,11 +28,17 @@
 		<h2>
 		Replies:
 		</h2>
+		<!-- TODO: handle no image reply with placeholder! -->
 		{#each data.replies as rep}
-		<ol>
-		<li> {rep.contents} </li>
-		</ol>
-
+		<Post
+			imagePath={composeImageURL(PB_URL, rep.attachment, rep.collectionId, rep.id)}
+			contents={rep.contents}
+			authorName={rep.expand.author.username}
+			timestamp={rep.created.slice(0, rep.created.length - 8)}
+			boardName={data.boardName}
+			postId={rep.id}
+			gotoButton={false}
+		/>
 		{/each}
 </main>
 

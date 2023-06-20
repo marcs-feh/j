@@ -11,6 +11,7 @@ let file : any;
 let contents : string
 let authorID : any = pb.authStore.model?.id;
 
+// TODO: make image optional, clear attach on post fail??
 let postStatus = 0 // -1 bad, 1 good
 
 const createPost = async () => {
