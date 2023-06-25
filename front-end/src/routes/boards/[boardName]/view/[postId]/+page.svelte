@@ -6,7 +6,9 @@
 
 	export let data;
 	const p = data.post
+
 	console.table(data.replies)
+
 </script>
 
 <main>
@@ -28,7 +30,6 @@
 		<h2>
 		Replies:
 		</h2>
-		<!-- TODO: handle no image reply with placeholder! -->
 		{#each data.replies as rep}
 		<Post
 			imagePath={composeImageURL(PB_URL, rep.attachment, rep.collectionId, rep.id)}

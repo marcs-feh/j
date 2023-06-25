@@ -11,9 +11,8 @@ export async function load({ params, url }){
 			expand: 'author',
 		})
 		
-		const filt = `replies.og_post = "${post.id}"`
-		console.table(filt)
 		replies = await pb.collection('replies').getList(1, 50, {
+			filter: `og_post = "${post.id}"`,
 			sort: '-created',
 			expand: 'author',
 		})

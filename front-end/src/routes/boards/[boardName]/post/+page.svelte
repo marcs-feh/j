@@ -13,7 +13,7 @@
 		formData.append('author', authorID)
 		formData.append('board', data.boardID)
 		formData.append('contents', contents)
-		console.table(contents)
+		// console.table(contents)
 		formData.append('attachment', new Blob(file))
 		try {
 			await pb.collection('posts').create(formData)

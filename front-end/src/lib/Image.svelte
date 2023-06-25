@@ -15,14 +15,13 @@
 	onMount(() => {
 		const img = new Image();
 		img.src = src;
-		// img.width = width;
-		// img.height = width;
 		loading = true;
 
 		img.onload = () => {
 			loading = false;
 			loaded = true;
 		};
+
 		img.onerror = () => {
 			loading = false;
 			failed = true;

@@ -6,8 +6,9 @@
 export let data;
 
 const p = data.post
-const formData = new FormData()
+let formData : FormData
 let file : any;
+let fileChosen = false;
 let contents : string
 let authorID : any = pb.authStore.model?.id;
 
@@ -15,10 +16,13 @@ let authorID : any = pb.authStore.model?.id;
 let postStatus = 0 // -1 bad, 1 good
 
 const createPost = async () => {
+	formData = new FormData();
   formData.append('author', authorID)
   formData.append('og_post', data.post.id)
   formData.append('contents', contents)
-  formData.append('attachment', new Blob(file))
+	if(fileChosen){
+		formData.append('attachment', new Blob(file))
+	}
   try {
     await pb.collection('replies').create(formData)
     postStatus = 1
@@ -39,6 +43,7 @@ const createPost = async () => {
   authorName={p.expand.author.username}
   timestamp={p.created.slice(0, p.created.length - 8)}
   boardName={data.boardName}
+	gotoButton={false}
   postId={p.id}
 />
 

@@ -5,7 +5,13 @@
 	export let timestamp : string;
 	export let boardName : string;
 	export let postId : string;
-	export let gotoButton : bool;
+	export let gotoButton : boolean;
+
+	import placeholder_img from '$lib/assets/no_image.png'
+
+	if(imagePath === null){
+		imagePath = placeholder_img
+	}
 
 </script>
 
