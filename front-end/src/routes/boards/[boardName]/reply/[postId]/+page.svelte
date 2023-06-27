@@ -15,6 +15,10 @@
 	// TODO: make image optional, clear attach on post fail??
 	let postStatus = 0 // -1 bad, 1 good
 
+	const redirPost = () => {
+		location.href = `/boards/${data.boardName}/view/${p.id}`
+	}
+
 	const createPost = async () => {
 		formData = new FormData();
 		formData.append('author', authorID)
@@ -57,14 +61,16 @@
 				</div>
 				<div class="attach-selection">
 					<input bind:files={file} type="file" accept="image/*" id="fileInput" name="attachment">
-						{#if postStatus != 1}
-							<button on:click={createPost}>Post!</button>
-						{/if}
+			{#if postStatus != 1}
+				<button on:click={createPost}>Post!</button>
+			{:else if postStatus == 1}
+				<button on:click={redirPost}> Reply Added </button>
+			{/if}
 				</div>
 			</form>
 			{#if postStatus == 1}
-				<a href={"/boards/"+data.boardName}> Post created! </a>
-				{:else if postStatus == -1}
+			 	Post created!
+			{:else if postStatus == -1}
 				Something went wrong when creating this post.
 			{/if}
 		</div>

@@ -9,6 +9,10 @@
 
 	let postStatus = 0 // -1 bad, 1 good
 
+	const redirPost = () => {
+		location.href = `/boards/${data.boardName}`
+	}
+
 	const createPost = async () => {
 		formData.append('author', authorID)
 		formData.append('board', data.boardID)
@@ -38,16 +42,22 @@
 				</div>
 				<div class="attach-selection">
 				<input bind:files={file} type="file" accept="image/*" id="file-input" name="attachment">
-				{#if postStatus != 1}
-				<button id="post-button" on:click={createPost}>Post!</button>
-				{/if}
-				</div>
-			</form>
-			{#if postStatus == 1}
-				<a href={"/boards/"+data.boardName}> Post created! </a>
-				{:else if postStatus == -1}
+			{#if postStatus != 1}
+				<button on:click={createPost}>Post!</button>
+			{:else if postStatus == 1}
+				<button on:click={redirPost}> View </button>
+			{:else if postStatus == -1}
 				Something went wrong when creating this post.
 			{/if}
+				</div>
+			</form>
+
+			{#if postStatus == 1}
+			 	Post created!
+			{:else if postStatus == -1}
+				Something went wrong when creating this post.
+			{/if}
+
 		</div>
 	</div>
 </main>

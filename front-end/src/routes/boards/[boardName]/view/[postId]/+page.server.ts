@@ -1,6 +1,6 @@
 import { PB_URL, currentUser, pb } from '../../../../../globals';
 import { serializeNonPOJOs } from '../../../../../utils';
-
+import { error, redirect } from '@sveltejs/kit';
 
 export async function load({ params, url }){
 	let post : any
@@ -21,7 +21,9 @@ export async function load({ params, url }){
 	catch(err){
 		console.table(err)
 		post = null
-		replies = null
+		replies = {
+			items: []
+		}
 	}
 
 	return {

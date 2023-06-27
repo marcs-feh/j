@@ -1,13 +1,19 @@
-<script>
-	import Post from '$lib/Post.svelte';
+<script lang="ts">
 	import { composeImageURL } from '../../../../../utils';
+	import { pb } from '../../../../../globals';
 	import { PB_URL, currentUser } from '../../../../../globals';
+	import Post from '$lib/Post.svelte';
 	import PostButton from '$lib/PostButton.svelte';
+	import DeleteButton from '$lib/DeleteButton.svelte';
 
 	export let data;
-	const p = data.post
 
-	console.table(data.replies)
+
+	const p = data.post
+	let canDelete : boolean = false;
+	if(pb.authStore != null){
+		canDelete = pb.authStore.model?.id == p.author
+	}
 
 </script>
 
@@ -21,7 +27,12 @@
 			postId={p.id}
 			gotoButton={false}
 		/>
-		{#if $currentUser}
+		{#if $currentUser && canDelete}
+		<div class="reply-and-del">
+		<DeleteButton title={"Delete"} postId={p.id} boardUrl={`${data.boardName}`}/>
+		<PostButton title={"Reply to Post"} ref={`/boards/${data.boardName}/reply/${data.post.id}`} />
+		</div>
+		{:else if $currentUser}
 		<PostButton title={"Reply to Post"} ref={`/boards/${data.boardName}/reply/${data.post.id}`} />
 		{:else}
 		<PostButton title={"Login"} ref={`/login`} />
@@ -44,4 +55,8 @@
 </main>
 
 <style>
+	.reply-and-del {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+	}
 </style>
