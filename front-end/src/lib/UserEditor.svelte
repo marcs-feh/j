@@ -19,6 +19,7 @@
 		try {
 			await pb.collection('users').update(pb.authStore.model?.id, formData)
 			updateStatus = 1;
+			setTimeout(() => location.reload(), 600)
 		} catch(err){
 			updateStatus = -1
 		}

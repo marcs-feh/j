@@ -60,6 +60,7 @@
 
 	img {
 		height: 200px;
+		max-width: 200px;
 		object-fit: fit;
 		border-radius: 50%;
 		border-style: solid;
