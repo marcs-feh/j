@@ -80,6 +80,7 @@
 	#title {
 		text-align: center;
 	}
+
 	.main {
 		display: block;
 		margin-left: auto;
