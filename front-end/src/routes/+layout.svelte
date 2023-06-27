@@ -18,6 +18,12 @@
 		color: #dcdcdc;
 	}
 
+	:global(input[type="file"]::file-selector-button){
+		font-family: 'Roboto', sans-serif;
+		font-size: 1rem;
+		border: solid;
+	}
+
 	:global(button){
 		font-family: 'Roboto', sans-serif;
 		font-size: 1rem;

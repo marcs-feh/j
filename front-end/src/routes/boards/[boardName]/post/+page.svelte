@@ -27,33 +27,55 @@
 </script>
 
 <main>
-	<h1>Post on: /{data.boardName} </h1>
-	<div class="postarea">
-		<form enctype="multipart/form-data">
-			<div class="text-editor">
-				<textarea bind:value={contents} name="post-contents" cols="30" rows="10" required></textarea>
-			</div>
-			<input bind:files={file} type="file" accept="image/*" id="fileInput" name="attachment">
+	<div class="main">
+		<div id="title">
+			<h1>Post on: /{data.boardName} </h1>
+		</div>
+		<div class="postarea">
+			<form enctype="multipart/form-data">
+				<div class="text-editor">
+					<textarea bind:value={contents} name="post-contents" cols="40" rows="12" required></textarea>
+				</div>
+				<div class="attach-selection">
+				<input bind:files={file} type="file" accept="image/*" id="file-input" name="attachment">
 				{#if postStatus != 1}
-					<button on:click={createPost}>Post!</button>
+				<button id="post-button" on:click={createPost}>Post!</button>
 				{/if}
-		</form>
-		{#if postStatus == 1}
-			<a href={"/boards/"+data.boardName}> Post created! </a>
-			{:else if postStatus == -1}
-			Something went wrong when creating this post.
-		{/if}
+				</div>
+			</form>
+			{#if postStatus == 1}
+				<a href={"/boards/"+data.boardName}> Post created! </a>
+				{:else if postStatus == -1}
+				Something went wrong when creating this post.
+			{/if}
+		</div>
 	</div>
 </main>
 
 <style>
-	.postarea {
-		display: grid;
-		grid-template-columns: 1fr;
+	#title {
+		text-align: center;
+	}
+	.main {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 80%;
 	}
 
 	textarea {
-		white-space: pre-wrap;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.attach-selection {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		margin-left: auto;
+		margin-right: auto;
+		width: 20em;
+		margin-top: 1rem;
 	}
 
 </style>
