@@ -8,11 +8,9 @@
 	const p = data.post
 	let formData : FormData
 	let file : any;
-	let fileChosen = false;
 	let contents : string
 	let authorID : any = pb.authStore.model?.id;
 
-	// TODO: make image optional, clear attach on post fail??
 	let postStatus = 0 // -1 bad, 1 good
 
 	const redirPost = () => {
@@ -24,7 +22,7 @@
 		formData.append('author', authorID)
 		formData.append('og_post', data.post.id)
 		formData.append('contents', contents)
-		if(fileChosen){
+		if(file != null && file != undefined){
 			formData.append('attachment', new Blob(file))
 		}
 		try {
