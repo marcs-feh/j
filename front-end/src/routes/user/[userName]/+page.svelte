@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { composeImageURL } from "../../../utils";
+	import UserEditor from "$lib/UserEditor.svelte";
 	import { PB_URL } from "../../../globals";
 	import genericAvatar from "$lib/assets/profile_pic.png"
 
@@ -8,7 +9,6 @@
 	if(data.userInfo){
 		profilePic = composeImageURL(PB_URL, data.userInfo.avatar, 'users', data.userInfo.id)
 	}
-
 </script>
 
 <main>
@@ -21,17 +21,18 @@
 				<img src={profilePic} alt="Avatar">
 					{/if}
 			</div>
-			<span id="username">
+			<span class="username">
 				{data.userInfo.username}
 			</span>
-			<span id="userbio">{data.userInfo.bio}</span>
-			<span id="userposts">Posts: {data.userPostCount}</span>
+			<span class="userposts">Posts: {data.userPostCount}</span>
+			<div class="userbio"> <b>Bio:</b> {data.userInfo.bio}</div>
 		</div>
 	{:else}
 		<div class="user-profile">
 			User not found
 		</div>
 	{/if}
+	<UserEditor />
 </main>
 
 <style>
@@ -61,7 +62,11 @@
 		border-color: lime;
 	}
 
-	#username {
+	.userbio {
+		margin: 2rem;
+	}
+
+	.username {
 		margin: 1rem;
 	}
 
